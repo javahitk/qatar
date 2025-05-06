@@ -1,94 +1,175 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-typedef struct node
-{
-    int data;
-    struct node* next;
-}node;
-node *adj[100];
-node *create(int x)
-{
-    node *head=(node *)malloc(sizeof(node));
-    head->data=x;
-    head->next=NULL;
-    return head;
-}
-void add(int src,int dest)
-{
-    if(!adj[src])
-    {
-        adj[src]=create(dest);
-        return;
-    }
-    node *t=adj[src];
-    while(t->next)
-    t=t->next;
+#include <string.h>
+#include <math.h>
 
-    t->next=create(dest);
-}
-bool safe(int *color,int x,int index)
-{
-    node *t=adj[x];
-    while(t)
-    {
-        if(color[t->data]==index)
-        return false;
-        t=t->next;
-    }
-    return true;
-}
-bool cancolor(int m,int x,int *color,int vertex)
-{
-    if(x==vertex+1)
-    return true;
+int goal[4][4]={{1,2,3,4},
+                {5,6,7,8},
+                {9,10,11,12},
+                {13,14,15,0}};
 
-    for(int i=1;i<=m;i++)
+int dx[4]={-1,1,0,0};
+int dy[4]={0,0,-1,1};
+
+typedef struct Node{
+    int mat[4][4];
+    int x,y;
+    int level,cost;
+    struct Node *parent;
+    struct Node *next;
+}Node;
+
+Node *newnode(int mat[4][4],int x,int y,int newx,int newy,int level,Node *parent)
+{
+    Node *node=(Node *)malloc(sizeof(Node));
+    memcpy(node->mat,mat,sizeof(node->mat));
+
+    int t=node->mat[x][y];
+    node->mat[x][y]=node->mat[newx][newy];
+    node->mat[newx][newy]=t;
+
+    node->x=newx;
+    node->y=newy;
+    node->level=level;
+    node->cost=0;
+    node->parent=parent;
+    node->next=NULL;
+    return node;
+}
+
+int dist(int mat[4][4])
+{
+    int ans=0;
+    for(int i=0;i<4;i++)
     {
-        if(safe(color,x,i))
+        for(int j=0;j<4;j++)
         {
-            color[x]=i;
-            if(cancolor(m,x+1,color,vertex))
-            return true;
-            color[x]=-1;
+            int val=mat[i][j]-1;
+            int goalx=val%4;
+            int goaly=val/4;
+            ans+=abs(goalx-j)+abs(goaly-i);
         }
     }
-    return false;
+    return ans;
+}
+
+void printmat(int mat[4][4])
+{
+    for(int i=0;i<4;i++)
+    {
+        for(int j=0;j<4;j++)
+        {
+            if(mat[i][j]==0)
+            printf(" ");
+            else printf("%d ",mat[i][j]);
+        }
+        printf("\n");
+    }
+    printf("-----------\n");
+}
+
+int issafe(int x,int y)
+{
+    return x<4&&y<4&&x>=0&&y>=0;
+}
+
+int isgoal(int mat[4][4])
+{
+    for(int i=0;i<4;i++)
+    {
+        for(int j=0;j<4;j++)
+        {
+            if(mat[i][j]!=goal[i][j])
+            return 0;
+        }
+    }
+    return 1;
+}
+void push(Node **head,Node *node)
+{
+    if(!(*head)||node->cost<(*head)->cost)
+    {
+        node->next=(*head);
+        (*head)=node;
+    }
+    else
+    {
+        Node* curr = *head;
+        while (curr->next && curr->next->cost <= node->cost)
+            curr = curr->next;
+        node->next = curr->next;
+        curr->next = node;
+    }
+}
+Node* pop(Node **head)
+{
+    if(!(*head))
+    return NULL;
+
+    Node *t=(*head);
+    *head=(*head)->next;
+    return t;
+}
+
+void printpath(Node *node)
+{
+    if(!node)
+    return;
+    printpath(node->parent);
+    printmat(node->mat);
+}
+
+void solve(int initial[4][4],int x,int y)
+{
+    Node *openlist=NULL;
+    Node *node=newnode(initial,x,y,x,y,0,NULL);
+    node->cost=dist(node->mat);
+
+    push(&openlist,node);
+
+   // int steps;
+    while(openlist)
+    {
+        Node *curr=pop(&openlist);
+        if(isgoal(curr->mat))
+        {
+            printf("Solved in %d steps!\n\n", curr->level);
+            printpath(curr);
+            return;
+        }
+        
+        for(int i=0;i<4;i++)
+        {
+            int newx=curr->x+dx[i];
+            int newy=curr->y+dy[i];
+
+            if(issafe(newx,newy))
+            {
+                Node *child=newnode(curr->mat,curr->x,curr->y,newx,newy,curr->level+1,curr);
+                child->cost=dist(child->mat)+child->level;
+                push(&openlist,child);
+            }
+        }
+        
+    }
+    printf("No soln found\n");
 }
 int main()
 {
-    int edges,vertex;
-    printf("Enter no of vertices : ");
-    scanf("%d",&vertex);
-    for(int i=0;i<=vertex;i++)
-    adj[i]=NULL;
-    printf("Enter no of egdes : ");
-    scanf("%d",&edges);
+    int initial[4][4] = {
+        {1, 2, 3, 4},
+        {5, 6, 0, 8},
+        {9,10, 7,11},
+        {13,14,15,12}
+    };
 
-    printf("Enter edges : \n");
-    for(int i=0;i<edges;i++)
-    {
-        int src,dest;
-        scanf("%d%d",&src,&dest);
-        add(src,dest);
-        add(dest,src);
-    }
+    int x, y;
+    for (int i = 0; i < 4; ++i)
+        for (int j = 0; j < 4; ++j)
+            if (initial[i][j] == 0)
+                x = i, y = j;
 
-    printf("Enter no of color : "); int m;
-    scanf("%d",&m);
+    solve(initial, x, y);
 
-    int color[vertex+1];
-    for(int i=1;i<=vertex;i++)
-    color[i]=-1;
-
-    if(cancolor(m,1,color,vertex))
-    {
-        for(int i=1;i<=vertex;i++)
-        {
-            printf("Node %d -> color %d\n",i,color[i]);
-        }
-    }
-    else
-    printf("Coloring not possible\n");
     return 0;
 }
