@@ -1,0 +1,275 @@
+Great! Here's a comprehensive set of viva answers for all your 13 algorithm topics:
+
+
+---
+
+1. Binary Search
+
+Q: What is binary search?
+An efficient algorithm to find an item in a sorted list by repeatedly dividing the search interval in half.
+
+Q: Time complexity?
+O(log n)
+
+Q: Why sorted array?
+Binary Search only works when the data is ordered so that half of the elements can be eliminated each time.
+
+Q: Worst-case complexity?
+O(log n)
+
+Q: Recursive vs Iterative?
+Both give O(log n) time. Recursive uses function calls; iterative uses loops.
+
+
+---
+
+2. Merge Sort
+
+Q: What is merge sort?
+A divide-and-conquer algorithm that splits the array into halves, recursively sorts them, then merges them.
+
+Q: Time & space complexity?
+Time: O(n log n)
+Space: O(n) extra space for merging
+
+Q: Why is it stable?
+It preserves the order of equal elements during merging.
+
+Q: Divide & conquer?
+Yes—recursively divide the array and merge sorted parts.
+
+Q: In-place?
+No, requires auxiliary space for merging.
+
+
+---
+
+3. BFS (Breadth-First Search)
+
+Q: Data structure used?
+Queue
+
+Q: Time & space complexity?
+O(V + E) for both time and space
+
+Q: Applications?
+
+Shortest path in unweighted graphs
+
+Level-order traversal in trees
+
+Social network analysis
+
+
+Q: Cycle handling?
+Use a visited[] array to avoid revisiting nodes.
+
+Q: Finds shortest path?
+Yes, on unweighted graphs.
+
+
+---
+
+4. DFS (Depth-First Search)
+
+Q: Difference from BFS?
+DFS explores deeply first using a stack (or recursion), while BFS explores level by level.
+
+Q: Data structure?
+Stack or call stack (recursion)
+
+Q: Time & space complexity?
+O(V + E)
+
+Q: Cycle detection?
+Yes—track visited and recursion stack for back edges.
+
+Q: Role of recursion?
+Manages the call stack implicitly for exploring deeper.
+
+
+---
+
+5. Prim’s Algorithm
+
+Q: Problem solved?
+Finding Minimum Spanning Tree (MST)
+
+Q: Difference from Kruskal’s?
+Prim grows MST from a vertex; Kruskal adds smallest edge globally.
+
+Q: Time complexity?
+O(E log V) with min-heap + adjacency list
+
+Q: Greedy?
+Yes—chooses the minimum edge at each step.
+
+Q: Disconnected graphs?
+Does not work for disconnected graphs.
+
+
+---
+
+6. Kruskal’s Algorithm
+
+Q: Approach?
+Sort edges, pick smallest one that doesn’t form a cycle.
+
+Q: Cycle detection?
+Uses Union-Find (Disjoint Set)
+
+Q: Time complexity?
+O(E log E) (because of sorting)
+
+Q: Greedy?
+Yes—picks the globally minimum edge each time.
+
+Q: Edge sorting importance?
+Ensures that the total MST weight is minimum.
+
+
+---
+
+7. Dijkstra’s Algorithm
+
+Q: Use?
+Find single-source shortest path with non-negative weights.
+
+Q: Negative weights?
+Not allowed—it gives incorrect results.
+
+Q: Priority queue role?
+Helps in efficiently picking the closest unvisited vertex.
+
+Q: Time complexity?
+O((V + E) log V) with min-heap
+
+Q: Difference from Bellman-Ford?
+Dijkstra is faster but can't handle negative weights.
+
+
+---
+
+8. Fractional Knapsack
+
+Q: Difference from 0/1 knapsack?
+Can take fractions of items, unlike 0/1 version.
+
+Q: Greedy approach?
+Yes—pick item with highest value/weight ratio.
+
+Q: Ratio usage?
+To maximize value per unit weight.
+
+Q: Time complexity?
+O(n log n) (due to sorting)
+
+Q: NP-complete?
+No, it's solvable in polynomial time.
+
+
+---
+
+9. Job Sequencing with Deadlines
+
+Q: Objective?
+Maximize total profit by scheduling jobs before their deadlines.
+
+Q: Greedy strategy?
+Sort jobs by profit (descending) and place them in the latest available slot before deadline.
+
+Q: Time complexity?
+O(n log n) due to sorting
+
+Q: DP required?
+No, greedy is sufficient.
+
+
+---
+
+10. Bellman-Ford Algorithm
+
+Q: Use?
+Find shortest path from a single source, even with negative weights.
+
+Q: Negative cycle detection?
+Yes—after V-1 iterations, if another relaxation is possible, a negative cycle exists.
+
+Q: Time complexity?
+O(V × E)
+
+Q: Difference from Dijkstra?
+Bellman-Ford handles negative weights, but is slower.
+
+Q: Initialization?
+dist[source] = 0, others = ∞
+
+Q: Why V-1 iterations?
+Any path can have at most V-1 edges, so after that all shortest paths are found.
+
+
+---
+
+11. Floyd-Warshall Algorithm
+
+Q: Problem solved?
+Finds shortest paths between all pairs of vertices.
+
+Q: Time complexity?
+O(V³)
+
+Q: Difference from Dijkstra/Bellman-Ford?
+Floyd-Warshall finds all-pairs paths; others are single-source.
+
+Q: Dynamic programming?
+Yes—uses intermediate vertices to update paths.
+
+Q: Negative cycle detection?
+Yes—check if dist[i][i] < 0.
+
+
+---
+
+12. Matrix Chain Multiplication
+
+Q: Problem?
+Find optimal way to parenthesize matrix products to minimize scalar multiplications.
+
+Q: Why order matters?
+Different grouping can lead to different computation costs.
+
+Q: Approach?
+Dynamic programming over all chain splits.
+
+Q: Time complexity?
+O(n³)
+
+Q: Greedy?
+No, greedy fails here.
+
+
+---
+
+13. N-Queen Problem
+
+Q: What is it?
+Place N queens on an N×N board so that no two attack each other.
+
+Q: Paradigm used?
+Backtracking
+
+Q: Backtracking approach?
+Place queens row-by-row, backtrack if conflict occurs.
+
+Q: Base vs Recursive case?
+Base: All queens placed.
+Recursive: Try placing a queen in each column of current row.
+
+Q: Brute force?
+Possible but inefficient—backtracking avoids invalid placements early.
+
+
+---
+
+Would you like this as a printable PDF or flashcards set for last-minute revision?
+
