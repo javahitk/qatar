@@ -1,3 +1,189 @@
+1. Binary Search
+
+Q1. Why is binary search more efficient than linear search?
+Binary search is more efficient because it cuts the search space in half each time, achieving O(log n) time complexity.
+
+Q2. What are the necessary conditions to apply binary search?
+The list must be sorted to apply binary search.
+
+Q3. How does binary search behave in the worst case?
+In the worst case, it takes O(log n) comparisons.
+
+Q4. What changes in binary search if the list is in descending order?
+For descending order, we compare the target with the middle element and reverse the direction accordingly.
+
+2. Merge Sort
+
+Q1. Why is merge sort called a divide-and-conquer algorithm?
+It divides the array into halves, sorts them recursively, and merges them—thus using divide-and-conquer.
+
+Q2. How does merge sort differ from quicksort in space usage?
+Merge sort uses O(n log n) time and O(n) space.
+
+Q3. Is merge sort preferred for linked lists or arrays? Why?
+It’s preferred for linked lists because merging can be done in-place without extra space.
+
+Q4. Why is merge sort stable?
+It’s stable because it does not change the relative order of equal elements.
+
+3. BFS (Breadth-First Search)
+
+Q1. Why is a queue used in BFS?
+A queue is used to process nodes level by level.
+
+Q2. How does BFS find the shortest path in an unweighted graph?
+BFS finds shortest paths by visiting neighbors level-wise in unweighted graphs.
+
+Q3. Can BFS be used on a tree?
+Yes, BFS can be used on trees.
+
+Q4. How does BFS behave on a disconnected graph?
+On disconnected graphs, BFS visits only reachable components unless restarted.
+
+4. DFS (Depth-First Search)
+
+Q1. What is the difference between iterative and recursive DFS?
+Recursive DFS uses function calls; iterative uses an explicit stack.
+
+Q2. Can DFS be used to detect cycles? How?
+Yes, by checking if a visited node is encountered again in the current path.
+
+Q3. In which applications is DFS preferred over BFS?
+DFS is useful in topological sort, cycle detection, and maze solving.
+
+Q4. How does DFS traverse a graph compared to BFS?
+DFS explores deeply before backtracking; BFS goes level by level.
+
+5. Prim’s Algorithm
+
+Q1. What is the significance of the visited array in Prim’s algorithm?
+The visited array ensures vertices are not revisited.
+
+Q2. Why is Prim’s algorithm greedy?
+It’s greedy because it always chooses the smallest edge to a new vertex.
+
+Q3. Can Prim’s algorithm be used on a disconnected graph?
+No, it only works on connected graphs.
+
+Q4. What is the difference in edge selection strategy between Prim and Kruskal?
+Prim builds the MST vertex-by-vertex; Kruskal uses global edge selection.
+
+6. Kruskal’s Algorithm
+
+Q1. Why do we sort edges in Kruskal’s algorithm?
+Sorting ensures we pick the minimum weight edges first.
+
+Q2. How does Union-Find prevent cycles in Kruskal’s algorithm?
+Union-Find tracks and merges components, preventing cycles.
+
+Q3. Is Kruskal’s algorithm applicable to directed graphs?
+No, it works on undirected graphs.
+
+Q4. Which is more efficient for sparse graphs—Prim or Kruskal?
+Kruskal is often more efficient for sparse graphs.
+
+7. Dijkstra’s Algorithm
+
+Q1. Why doesn’t Dijkstra’s algorithm work with negative weights?
+It assumes shortest paths can’t be improved via negative edges.
+
+Q2. What role does the priority queue play in Dijkstra’s algorithm?
+The priority queue selects the vertex with the smallest tentative distance.
+
+Q3. Can Dijkstra’s algorithm be applied to directed graphs?
+Yes, it works on directed graphs.
+
+Q4. How do we update distances in Dijkstra’s algorithm?
+When a shorter path to a node is found, its distance is updated.
+
+8. Fractional Knapsack
+
+Q1. Why is the greedy method applicable in the fractional knapsack problem?
+Greedy works because fractions of items can be taken.
+
+Q2. What makes fractional knapsack solvable in polynomial time?
+Items are divided based on value/weight ratio, achieving polynomial time.
+
+Q3. What is the difference in approach between fractional and 0/1 knapsack?
+In 0/1 knapsack, you take the whole item or none; not fractional.
+
+Q4. What is the use of value/weight ratio?
+The ratio ensures maximum value per unit weight.
+
+9. Job Sequencing with Deadlines
+
+Q1. Why are jobs sorted by profit in job sequencing?
+Higher profit jobs are prioritized for early slots.
+
+Q2. What is the significance of the deadline in scheduling?
+Deadlines constrain the latest time a job can be scheduled.
+
+Q3. Why is a greedy strategy sufficient for this problem?
+A greedy method suffices because jobs are chosen based on profit.
+
+Q4. Can two jobs be scheduled at the same time?
+No, only one job per slot is allowed.
+
+10. Bellman-Ford Algorithm
+
+Q1. Why are V-1 iterations required in Bellman-Ford?
+Any shortest path has at most V-1 edges, so we relax edges V-1 times.
+
+Q2. How does Bellman-Ford detect negative weight cycles?
+An extra iteration after V-1 checks for further improvements—if any exist, there's a negative cycle.
+
+Q3. What is the difference in relaxation steps between Bellman-Ford and Dijkstra?
+Dijkstra is faster but can't handle negative weights; Bellman-Ford can.
+
+Q4. How is initialization done in Bellman-Ford?
+Set the source to 0 and all others to infinity initially.
+
+11. Floyd-Warshall Algorithm
+
+Q1. What does dist[i][j] represent in Floyd-Warshall?
+It holds the shortest distance from vertex i to j.
+
+Q2. How does Floyd-Warshall update shortest paths?
+For each vertex k, it checks if a shorter path exists via k.
+
+Q3. Can Floyd-Warshall work with negative weights?
+Yes, it works with negative weights but not negative cycles.
+
+Q4. How is a negative cycle detected in Floyd-Warshall?
+A negative cycle exists if any dist[i][i] < 0 after the algorithm.
+
+12. Matrix Chain Multiplication
+
+Q1. Why does matrix multiplication order affect performance?
+Matrix multiplication is associative but not commutative, so order affects cost.
+
+Q2. What is the goal in matrix chain multiplication?
+To find the most efficient order of multiplication.
+
+Q3. Why can’t we use greedy approach here?
+Greedy methods don’t guarantee minimum cost.
+
+Q4. What does the dynamic programming table represent?
+The DP table holds minimum multiplications needed between matrices i to j.
+
+13. N-Queens Problem
+
+Q1. What is the basic idea of backtracking in N-Queens?
+Backtracking places queens row-by-row and backtracks on invalid setups.
+
+Q2. How do we check for safe positions on the board?
+A position is safe if no queen is in the same column or diagonal.
+
+Q3. What makes brute force inefficient for this problem?
+Brute force tries all positions without pruning; it's too slow.
+
+Q4. What is the base condition in the recursive N-Queens solution?
+Base case: all queens placed; recursive case: try each column in the row.
+
+
+
+All the conceptual viva questions across topics have now been answered and compiled with both questions and answers. Would you like me to generate a downloadable PDF version for easy printing or offline study?
+
 Great! Here's a comprehensive set of viva answers for all your 13 algorithm topics:
 
 
